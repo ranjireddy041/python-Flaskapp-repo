@@ -55,7 +55,16 @@ connection {
                 #✅ Install eksctl
                 "curl --silent --location \"https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz\" | tar xz -C /tmp",
                 "sudo mv /tmp/eksctl /usr/local/bin",
-                "eksctl version"
+                "eksctl version",
+                "sudo apt update",
+                "sudo apt install fontconfig openjdk-21-jre -y",
+                "java -version",
+                "sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2026.key",
+                "echo \"deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/\" | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null",
+                "sudo apt update",
+                "sudo apt install jenkins -y",
+                "sudo systemctl start jenkins",
+                "sudo systemctl enable jenkins"
               ]
             }     
 } 
@@ -65,34 +74,5 @@ terraform {
     key    = "eks-flaskapp/terraform.tfstate"
     region = "ap-south-1"
     use_lockfile = "true"
-  }
-}
-
-resource "aws_instance" "jenkins" {
-  ami = var.ami_id
-  instance_type = "t3.small"
-  vpc_security_group_ids = [aws_security_group.app-sg.id]
-  key_name = var.key_name
-  tags = {
-    Name = "jenkins"
-  }
-  connection {
-    type = "ssh"
-    user = "ubuntu"
-    private_key = file("C:/Users/ADMIN/Desktop/Terraform/terraform-eks-2/ap-test.pem")
-    host = self.public_ip
-  }
-  provisioner "remote-exec" {
-    inline = [
-      "sudo apt update",
-      "sudo apt install fontconfig openjdk-21-jre -y",
-      "java -version",
-      "sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2026.key",
-      "echo \"deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/\" | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null",
-      "sudo apt update",
-      "sudo apt install jenkins -y",
-      "sudo systemctl start jenkins",
-      "sudo systemctl enable jenkins"
-    ]
   }
 }
