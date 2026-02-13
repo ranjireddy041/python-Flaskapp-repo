@@ -1,0 +1,9 @@
+apiversion: v1
+kind: storageClassName
+metadata:
+  name: flask-app-sc
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: gp2
+  reclaimPolicy: Retain
+  volumeBindingMode: WaitForFirstConsumer

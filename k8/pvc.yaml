@@ -1,0 +1,12 @@
+apiversion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: flask-app-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: "flask-app-sc"
+  

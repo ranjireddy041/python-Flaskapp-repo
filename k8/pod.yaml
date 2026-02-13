@@ -7,6 +7,6 @@ metadata:
 spec:
   containers:
     - name: flaskapp-container
-      image: tanjidokcerhub/flaskapp:latest
+      image: ranjidokcerhub/flaskapp:latest
       ports:
         - containerPort: 5000
