@@ -70,8 +70,8 @@ connection {
 } 
 terraform {
   backend "s3" {
-    bucket = "ranjith-devops-terraform-bucket-001"
-    key    = "eks-flaskapp/terraform.tfstate"
+    bucket = "ranji-terraform-ec2-bucket "
+    key    = "ec2/terraform.tfstate"
     region = "ap-south-1"
     use_lockfile = "true"
   }
