@@ -1,12 +1,12 @@
 variable "aws_region" {
-default = "ap-south-1"
+default = "us-east-1"
 }
 variable "ami_id" {
 description = "Amazon Linux 2 AMI"
-default = "ami-019715e0d74f695be"
+default = "ami-0f3caa1cf4417e51b"
 }
 variable "key_name" {
   description = "EC2 Key Pair Name"
-    default     = "ap-test"
+    default     = "test"
 }
 
