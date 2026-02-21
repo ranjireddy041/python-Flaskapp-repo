@@ -72,7 +72,7 @@ terraform {
   backend "s3" {
     bucket = "ranji-terraform-ec2-bucket "
     key    = "ec2/terraform.tfstate"
-    region = "ap-south-1"
+    region = "us-east-1"
     use_lockfile = "true"
   }
 }
